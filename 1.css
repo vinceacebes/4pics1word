@@ -1,0 +1,69 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#image-grid {
+    width: 100vw;
+    height: 100%;
+}
+
+#image-grid .image {
+    height: 200px;
+    width: fit-content;
+}
+
+#image-grid {
+
+    display: grid;
+    grid-template-areas: "one two"
+        "three four";
+    justify-content: center;
+
+
+}
+
+#one {
+    grid-area: one;
+}
+
+#two {
+    grid-area: two;
+}
+
+#three {
+    grid-area: three;
+}
+
+#four {
+    grid-area: four;
+}
+
+.hide {
+    display: none !important;
+}
+
+#score-wrapper {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: pink;
+    display: grid;
+    place-items: center;
+}
+
+#timer {
+    font-size: 5rem;
+}

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>APAT NA AKO SAGUTIN MO</title>
+</head>
+
+<body>
+    <div class="cs_department">
+        <!-- business container back button -->
+        <a href="./department.html">
+            <button class="topLeft_backBtn">BACK</button>
+        </a>
+
+        <div class="game-container">
+            <!-- title -->
+            <div class="dep_title">
+                <h1 id="title"
+                    style="pointer-events: none; font-size: 3.5em; font-weight: 1000; color: #e0af45; text-shadow: 3px 3px black;   ">
+                    COMPUTER SCIENCE DEPARTMENT</h1>
+                <div id="timer_container" style="display: none;">
+                    <h1 id="timer-display" style="pointer-events: none;">05:00</h1>
+                </div>
+            </div>
+
+            <!-- Images will be generated here -->
+            <div id="image_container"></div>
+
+            <!-- Word boxes will be generated here -->
+            <div id="word_box"></div>
+
+            <!-- Random letters will be generated here -->
+            <div id="letter_container"></div>
+
+            <!-- buttons -->
+            <div class="btn_row" id="btn_row1">
+                <button id="start_btn" class="depBtn_rows">START</button>
+                <a href="./index.html">
+                    <button ID="home_btn" class="depBtn_rows">GO BACK TO HOMEPAGE</button>
+                </a>
+                <button id="submit_btn" class="depBtn_rows" style="display: none;">Submit</button>
+                <button id="clear_btn" class="depBtn_rows" style="display: none;">Clear</button>
+            </div>
+
+            <div id="feedback"></div>
+            <div id="score" style="display: none; pointer-events: none;">Score: 0</div>
+        </div>
+        <script src="./script.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+                const wordBox = document.getElementById("word_box");
+                const letter_container = document.getElementById("letter_container");
+                const image_container = document.getElementById("image_container");
+                const feedback = document.getElementById("feedback");
+                const score_element = document.getElementById("score");
+                const start = document.getElementById("start_btn");
+                const submit = document.getElementById("submit_btn");
+                const clear = document.getElementById("clear_btn");
+                const time_container = document.getElementById("timer_container");
+                const timer = document.getElementById("timer-display");
+                const home = document.getElementById("home_btn");
+
+                // homepage button
+                function disphomepagebtn() {
+                    home.style.display = home.style.display === "none" ? "block" : "none";
+                }
+
+                // FOR TIMER
+                let timerSet = 300; // 5 minute
+                let timerInterval;
+
+                //stop timer
+                function stoptimer() {
+                    clearInterval(timerInterval);
+                }
+
+                // start timer function
+                function startTimer() {
+                    timerInterval = setInterval(() => {
+                        timerSet -= 1;
+                        updateTimer();
+                        if (timerSet <= 0) {
+                            clearInterval(timerInterval);
+                            timer.innerHTML = "TAPOS!"; 
+                            wordBox.remove();
+                            letter_container.remove();
+                            image_container.remove();
+                            submit.remove();
+                            clear.remove();
+                            disphomepagebtn();
+                        }
+                    }, 1000);
+                }
+
+                // updates timer
+                function updateTimer() {
+                    let minutes = Math.floor(timerSet / 60);
+                    let seconds = timerSet % 60;
+                    timer.innerHTML = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+                }
+
+                const levels = [
+                    { images: ["image/CRIMINAL AND JUSTICE/crime.png"], answer: "CRIME" },
+                    { images: ["image/CRIMINAL AND JUSTICE/drugs.png"], answer: "DRUGS" },
+                    { images: ["image/CRIMINAL AND JUSTICE/investigation.png"], answer: "INVESTIGATION" },
+                    { images: ["image/CRIMINAL AND JUSTICE/jail.png"], answer: "JAIL" },
+                    { images: ["image/CRIMINAL AND JUSTICE/justice.png"], answer: "JUSTICE" }
+                ];
+
+                let currentLevel = 0;
+                let score = 0;
+
+                start.addEventListener("click", startGame);
+
+                // start button click
+                function startGame() {
+                    startTimer();
+                    document.getElementById("title").remove();
+
+                    // remove the play button display the submit, clear, timer
+                    start.remove();
+                    home.style.display = "none";
+                    clear.style.display = "block";
+                    submit.style.display = "block";
+                    time_container.style.display = "block";
+                    score_element.style.display = "block";
+
+                    initializeLevel(currentLevel);
+                }
+
+                // initialize the level
+                function initializeLevel(levelIndex) {
+                    const { images, answer } = levels[levelIndex];
+
+                    // Clear previous content
+                    wordBox.innerHTML = "";
+                    letter_container.innerHTML = "";
+                    image_container.innerHTML = "";
+
+                    // Display image(s)
+                    images.forEach(image => {
+                        const imgElement = document.createElement("img");
+                        imgElement.src = image;
+                        image_container.appendChild(imgElement);
+                    });
+
+                    // Create word boxes based on the length of the answer
+                    for (let i = 0; i < answer.length; i++) {
+                        const box = document.createElement("div");
+                        box.classList.add("word-box");
+                        wordBox.appendChild(box);
+
+                        // Add click event to return the letter to the choices
+                        box.addEventListener("click", () => {
+                            if (box.textContent) {
+                                const letterElement = document.querySelector(`.letter.hidden[data-letter="${box.textContent}"]`);
+                                if (letterElement) {
+                                    letterElement.style.visibility = "visible";
+                                    letterElement.classList.remove("hidden");
+                                    box.textContent = "";
+                                }
+                            }
+                        });
+                    }
+
+                    // Shuffle the letters array
+                    const shuffledLetters = shuffleArray([...letters]);
+
+                    // Select 16 - answer.length random letters excluding the answer letters
+                    const filteredLetters = shuffledLetters.filter(letter => !answer.includes(letter));
+                    const randomLetters = filteredLetters.slice(0, 16 - answer.length);
+
+                    // Add the answer letters to the random letters
+                    const answerLetters = answer.split("");
+                    const gameLetters = shuffleArray(randomLetters.concat(answerLetters));
+
+                    // Display the letters
+                    gameLetters.forEach(letter => {
+                        const letterElement = document.createElement("div");
+                        letterElement.classList.add("letter");
+                        letterElement.textContent = letter;
+                        letterElement.dataset.letter = letter;
+                        letter_container.appendChild(letterElement);
+
+                        letterElement.addEventListener("click", () => {
+                            const emptyBox = document.querySelector(".word-box:empty");
+                            if (emptyBox) {
+                                emptyBox.textContent = letter;
+                                letterElement.style.visibility = "hidden";
+                                letterElement.classList.add("hidden");
+                            }
+                        });
+                    });
+
+                    feedback.textContent = "";
+                }
+
+                // clear button
+                clear.addEventListener("click", () => {
+                    document.querySelectorAll(".word-box").forEach(box => box.textContent = "");
+                    document.querySelectorAll(".letter.hidden").forEach(letter => {
+                        letter.style.visibility = "visible";
+                        letter.classList.remove("hidden");
+                    });
+                    feedback.textContent = "";
+                });
+
+                // submit button
+                submit.addEventListener("click", () => {
+                    const selectedWord = Array.from(document.querySelectorAll(".word-box")).map(box => box.textContent).join("");
+                    if (selectedWord === levels[currentLevel].answer) {
+                        feedback.textContent = "Congratulations!"
+                        feedback.style.color = "green";
+                        score++;
+
+                        // score 
+                        score_element.textContent = `Score: ${score}`;
+                        setTimeout(() => {
+                            currentLevel++;
+                            if (currentLevel < levels.length) {
+                                initializeLevel(currentLevel);
+                            } else {
+                                feedback.textContent = "You have completed all levels!";
+                                wordBox.remove();
+                                letter_container.remove();
+                                image_container.remove();
+                                submit.remove();
+                                clear.remove();
+                                disphomepagebtn();
+                                stoptimer();
+                            }
+                        }, 1000);
+                    } else {
+                        feedback.textContent = "Try Again!";
+                        feedback.style.color = "red";
+                    }
+                });
+
+                // shuffle function
+                function shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+
+                    return array;
+                }
+            });
+        </script>
+</body>
+
+</html>

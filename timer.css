@@ -1,0 +1,61 @@
+body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.timer-container {
+    position: absolute;
+    top: 1px;
+    left: 40x;
+}
+
+.time-display {
+    margin-bottom: 20px;
+}
+
+#timer-display {
+    font-size: 48px;
+}
+
+.timer-bar {
+    position: absolute;
+    top: 100px; /* adjust the top or bottom postion */
+    left: 42%; /* adjust the left or right position */
+    transform: translateX(-50%);
+    width: 300px;
+    height: 20px;
+}
+
+.outer-box {
+    width: 180%;
+    height: 130%;
+    background-color: #dddddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.inner-box {
+    width: 100%;
+    height: 100%;
+    background-color: #e1d11a; /* change color */
+    transition: width 1s ease-in-out;
+}
+
+.start-button {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.start-button button {
+    font-size: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+}

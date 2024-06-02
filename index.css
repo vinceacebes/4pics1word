@@ -1,0 +1,254 @@
+/* html doc */
+*>body {
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    background-image: url("./resources/mainbg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* headings settings */
+.headings {
+    pointer-events: none;
+}
+
+/* btn settings */
+.btn {
+    border-radius: 10px;
+    background-color: #e0af45;
+    font-weight: 1000;
+    font-size: 2.5em;
+    padding: 5px 75px 5px 75px;
+    transition-duration: 400ms;
+    border: 2px solid black;
+    color: black;
+    box-shadow: 2px 2px 5px black;
+    cursor: pointer;
+}
+
+/* btn properties */
+.btn:hover {
+    background-color: #ffae00;
+    box-shadow: 3px 3px 6px black;
+}
+
+/* select screen btn container */
+#select_btn_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px
+}
+
+/* top left back button position & settings */
+.topLeft_backBtn {
+    position: absolute;
+    left: 50px;
+    top: 25px;
+    border: 2px solid black;
+    background-color: #e0af45;
+    font-weight: 1000;
+    border-radius: 5px;
+    font-size: 1.5em;
+    box-shadow: 3px 3px 10px black;
+    transition-duration: 400ms;
+    padding: 10px 20px 10px 20px;
+}
+
+/* top left back button position */
+.topLeft_backBtn:hover {
+    background-color: #ffae00;
+    cursor: pointer;
+}
+
+/* department data settings */
+.department_data {
+    padding: 5px 10px 5px 10px;
+}
+
+/* department sceen btn settings */
+.dep_btn {
+    color: black;
+    font-weight: 1000;
+    border: 2px solid black;
+    background-color: #e0af45;
+    border-radius: 5px;
+    padding: 5px 15px 5px 15px;
+    box-shadow: 3px 3px 10px black;
+    width: 100%;
+    height: 70px;
+    font-size: 1.5em;
+    transition-duration: 400ms;
+}
+
+/* department buttons properties */
+.dep_btn:hover {
+    background-color: #ffae00;
+    cursor: pointer;
+}
+
+/* departments title position */
+.dep_title {
+    display: flex;
+    justify-content: center;
+}
+
+/* departments btn position */
+.section_btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 25px;
+}
+
+/* departments btn container settings*/
+.btn_row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* departments btn settings */
+.depBtn_rows {
+    background-color: #e0af45;
+    font-weight: 1000;
+    font-size: 1.5em;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px black;
+    border: 2px solid black;
+    padding: 10px 20px 10px 20px;
+    font-family: 'Franklin Gothic Medium';
+    transition-duration: 400ms;
+    margin: 0 10px 0 10px;
+}
+
+/* departments btn properties */
+.depBtn_rows:hover {
+    cursor: pointer;
+    background-color: #ffae00;
+}
+
+/* start btn settings */
+#start_btn {
+    background-color: #e0af45;
+    font-weight: 1000;
+    font-size: 2em;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px black;
+    border: 2px solid black;
+    padding: 10px 20px 10px 20px;
+    font-family: 'Franklin Gothic Medium';
+    transition-duration: 400ms;
+    margin: 0 10px 0 10px;
+}
+
+/* image container*/
+#image_container {
+    display: flex;
+    justify-content: center;
+}
+
+/* word_box container */
+#word_box {
+    display: flex;
+    justify-content: center;
+    margin: 10px 10px;
+}
+
+/* word_box settings */
+.word-box {
+    width: 40px;
+    height: 40px;
+    margin: 0 1px 0 1px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: #fff;
+    transition-duration: 50ms;
+}
+
+/* word-box properties */
+.word-box:hover {
+    cursor: pointer;
+    background-color: #ffffff68
+}
+
+#letter_container {
+    display: flex;
+    margin: 10px 10px;
+}
+
+.letter {
+    width: 40px;
+    height: 40px;
+    margin: 0 1px 0 1px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: #e0af45;
+    transition-duration: 50ms;
+}
+
+.letter:hover {
+    cursor: pointer;
+    background-color: #ffae00;
+}
+
+#feedback {
+    margin-top: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.score {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#timer_container {
+    background-color: white;
+    color: #e0af45;
+    text-shadow: 1px 1px 1px black;
+    border-radius: 5dvh;
+    border: 2px solid black;
+    width: 25%;
+    text-align: center;
+    margin: 5px 5px;
+}
+
+/* score position & settings */
+#score {
+    position: absolute;
+    right: 50px;
+    top: 25px;
+    border: 2px solid black;
+    background-color: white;
+    color: #e0af45;
+    text-shadow: 1px 1px 1px black;
+    font-weight: 1000;
+    border-radius: 5px;
+    font-size: 1.5em;
+    box-shadow: 3px 3px 10px black;
+    transition-duration: 400ms;
+    padding: 10px 20px 10px 20px;
+}
